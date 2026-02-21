@@ -16,14 +16,24 @@
         rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/src/style.css">
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="loader-line"></div>
+            <div class="loader-text">INITIALIZING SYSTEMS...</div>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor-glow"></div>
 
-    <!-- Background Particles -->
+    <!-- Background Particles & 3D WebGL Canvas -->
+    <canvas id="three-canvas"></canvas>
+    <div class="telemetry-overlay" id="telemetry"></div>
     <div class="particles-container"></div>
 
     <!-- Header / Navbar -->
@@ -54,7 +64,16 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="label-reveal reveal-element">
-                        <span class="label">🛡️ TITANIUM-GRADE SOFTWARE ARCHITECTURE</span>
+                        <span class="label" aria-label="Titanium Software Architecture">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="inline-icon">
+                                <path
+                                    d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z">
+                                </path>
+                            </svg>
+                            TITANIUM-GRADE SOFTWARE ARCHITECTURE
+                        </span>
                     </div>
                     <h1 class="hero-title reveal-element">
                         <span class="text-gradient">Engineering Excellence</span> through Full-Stack Precision.
@@ -69,8 +88,8 @@
                     </div>
                 </div>
                 <div class="hero-visual reveal-element">
-                    <div class="sphere">
-                        <div class="sphere-inner"></div>
+                    <div class="sphere" id="3d-entity-trigger">
+                        <div id="three-container"></div>
                     </div>
                     <!-- This will be overlayed with images/hero_visual.png when available -->
                 </div>
@@ -216,10 +235,17 @@
 
                 <div class="projects-grid">
                     <!-- Project 1 -->
-                    <div class="glass-card project-card reveal-element">
+                    <div class="glass-card project-card reveal-element" role="article"
+                        aria-labelledby="project-1-title">
                         <div class="project-header">
-                            <div class="icon-3d">🛡️</div>
-                            <h3 class="project-name">Nexus UVM</h3>
+                            <div class="icon-3d">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z" />
+                                </svg>
+                            </div>
+                            <h3 class="project-name" id="project-1-title">Nexus UVM</h3>
                         </div>
                         <p class="project-desc">Comprehensive digital ecosystem designed to streamline and automate
                             academic resource management within Engineering Faculties.</p>
@@ -227,14 +253,23 @@
                             <span class="tag">Management</span>
                             <span class="tag">Security</span>
                         </div>
-                        <a href="https://github.com/drrk2/gestor" target="_blank" class="project-link">View Repo →</a>
+                        <a href="https://github.com/drrk2/gestor" target="_blank" class="project-link"
+                            aria-label="View Nexus UVM repository on GitHub">View Repo →</a>
                     </div>
 
                     <!-- Project 2 -->
-                    <div class="glass-card project-card reveal-element">
+                    <div class="glass-card project-card reveal-element" role="article"
+                        aria-labelledby="project-2-title">
                         <div class="project-header">
-                            <div class="icon-3d">📊</div>
-                            <h3 class="project-name">PromedioPro</h3>
+                            <div class="icon-3d">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M3 3v18h18" />
+                                    <path d="m19 9-5 5-4-4-3 3" />
+                                </svg>
+                            </div>
+                            <h3 class="project-name" id="project-2-title">PromedioPro</h3>
                         </div>
                         <p class="project-desc">Automatic grade calculator for students, focusing on simple logic and
                             high usability.</p>
@@ -242,15 +277,26 @@
                             <span class="tag">Academic</span>
                             <span class="tag">Calculator</span>
                         </div>
-                        <a href="https://github.com/drrk2/PromedioPro" target="_blank" class="project-link">View Repo
+                        <a href="https://github.com/drrk2/PromedioPro" target="_blank" class="project-link"
+                            aria-label="View PromedioPro repository on GitHub">View Repo
                             →</a>
                     </div>
 
                     <!-- Project 3 -->
-                    <div class="glass-card project-card reveal-element">
+                    <div class="glass-card project-card reveal-element" role="article"
+                        aria-labelledby="project-3-title">
                         <div class="project-header">
-                            <div class="icon-3d">🛒</div>
-                            <h3 class="project-name">API Commerce</h3>
+                            <div class="icon-3d">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="8" cy="21" r="1" />
+                                    <circle cx="19" cy="21" r="1" />
+                                    <path
+                                        d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                                </svg>
+                            </div>
+                            <h3 class="project-name" id="project-3-title">API Commerce</h3>
                         </div>
                         <p class="project-desc">Purchasing system with integrated API for streamlined e-commerce
                             operations.</p>
@@ -258,7 +304,8 @@
                             <span class="tag">API</span>
                             <span class="tag">Commerce</span>
                         </div>
-                        <a href="https://github.com/drrk2/project" target="_blank" class="project-link">View Repo →</a>
+                        <a href="https://github.com/drrk2/project" target="_blank" class="project-link"
+                            aria-label="View API Commerce repository on GitHub">View Repo →</a>
                     </div>
                 </div>
             </div>
@@ -275,7 +322,15 @@
                     </div>
                 </div>
                 <div class="about-text reveal-element">
-                    <span class="label">WHO AM I</span>
+                    <span class="label" aria-label="Who is Drrk2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="inline-icon">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        WHO AM I
+                    </span>
                     <h2 class="section-title">Drrk2: Engineering with Obsidiana Style</h2>
                     <p>I am a software engineer dedicated to creating high-performance digital solutions that solve
                         real-world bottlenecks. My approach combines "Titanium" hardware-grade precision with the sleek,
@@ -283,8 +338,9 @@
                     <p>With a deep understanding of full-stack ecosystems, I focus on building systems that are not
                         just' websites' but true engineering achievements.</p>
                     <div class="social-links">
-                        <a href="#" class="nav-link">LinkedIn</a>
-                        <a href="https://github.com/drrk2" target="_blank" class="nav-link">GitHub</a>
+                        <a href="#" class="nav-link" aria-label="Visit my LinkedIn profile">LinkedIn</a>
+                        <a href="https://github.com/drrk2" target="_blank" class="nav-link"
+                            aria-label="Visit my GitHub profile">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -331,7 +387,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
