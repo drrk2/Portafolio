@@ -3,46 +3,43 @@
    ========================================================= */
 
 :root {
-    /* FONDOS (Obsidiana Fría) */
-    --bg-primary: #09090B;
-    /* Fondo base */
-    --bg-secondary: #121214;
-    /* Elevación 1 */
-    --bg-tertiary: #18181B;
-    /* Elevación 2 - Cards */
+    /* FONDOS (Deep Obsidian Layering) */
+    --bg-primary: #050507;
+    /* Space Black */
+    --bg-secondary: #0A0A0C;
+    /* Elevator Layer */
+    --bg-tertiary: #0F0F12;
+    /* Interactive Surface */
+    --bg-quaternary: #141417;
 
-    /* ACENTO PRIMARIO: TITANIO CHAMPAGNE */
-    --primary-50: #FDFCFB;
-    --primary-100: #F3F0EB;
-    --primary-200: #E6DED1;
-    --primary-300: #D4C6B3;
-    /* Glow light */
-    --primary-400: #C2AE92;
-    /* Hover */
+    /* ACENTO PRIMARIO: TITANIO CHAMPAGNE (Metal Polished) */
+    --primary-50: #FAF9F6;
+    --primary-100: #F1EFEA;
+    --primary-200: #E3DED1;
+    --primary-300: #D1C4B0;
+    --primary-400: #BFAF94;
     --primary-500: #AE9775;
-    /* BASE */
-    --primary-600: #937C5B;
-    /* Active */
-    --primary-700: #7A6346;
-    --primary-800: #624E38;
-    --primary-900: #4B3B2B;
+    /* THE CORE */
+    --primary-600: #8E7A5E;
+    --primary-700: #6E5E49;
+    --primary-800: #4F4335;
+    --primary-900: #2F2820;
 
-    /* TEXTOS */
-    --text-primary: #F4F4F5;
-    /* Títulos */
-    --text-secondary: #A1A1AA;
-    /* Body - Anti-Halación */
-    --text-tertiary: #71717A;
-    /* Meta */
-    --text-quaternary: #52525B;
+    /* TEXTOS (Anti-Halation Optimized) */
+    --text-primary: #F8F8F8;
+    /* Pearl White */
+    --text-secondary: #A0A0A5;
+    /* Technical Silver */
+    --text-tertiary: #6E6E73;
+    /* Muted Steel */
 
-    /* ACENTOS SECUNDARIOS */
-    --success: #10B981;
-    --info: #38BDF8;
-    --warning: #F59E0B;
+    /* GLASSMorphism Constants */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.06);
+    --glass-glow: rgba(174, 151, 117, 0.1);
 
     /* EASING */
-    --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-luxury: cubic-bezier(0.2, 0, 0, 1);
     --ease-magnetic: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -127,8 +124,33 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-secondary);
     font-family: 'Inter', sans-serif;
-    line-height: 1.7;
+    line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Engineering Texture Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+    background-size: 40px 40px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Noise Grain */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Cfilter id='noiseFilter'%3%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    z-index: 1000;
+    pointer-events: none;
 }
 
 h1,
@@ -195,10 +217,96 @@ h3 {
     background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-500) 40%, var(--primary-300) 80%, var(--primary-600) 100%);
     background-size: 200% auto;
     transition: 0.5s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary-gradient:hover {
     background-position: right center;
+    box-shadow: 0 0 30px rgba(174, 151, 117, 0.3);
+    border-color: var(--primary-200);
+}
+
+/* Engineering Markers (CAD Style) */
+.precision-marker {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--primary-700);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.marker-tl {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.marker-tr {
+    top: 10px;
+    right: 10px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.marker-bl {
+    bottom: 10px;
+    left: 10px;
+    border-right: none;
+    border-top: none;
+}
+
+.marker-br {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.6;
+}
+
+.mouse {
+    width: 22px;
+    height: 36px;
+    border: 2px solid var(--primary-500);
+    border-radius: 12px;
+    position: relative;
+}
+
+.wheel {
+    width: 2px;
+    height: 6px;
+    background: var(--primary-500);
+    border-radius: 1px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 2s infinite;
+}
+
+@keyframes scroll-wheel {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(14px);
+        opacity: 0;
+    }
 }
 
 /* Custom Cursor */
@@ -411,47 +519,40 @@ h3 {
     line-height: 1.5;
 }
 
-/* Glass Card - Stable Hover Fix */
+/* Glass Card - High Fidelity */
 .glass-card {
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(174, 151, 117, 0.01) 100%);
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 32px;
-    transition: all 0.5s var(--ease-luxury);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(174, 151, 117, 0.02) 100%);
+    backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.6s var(--ease-luxury);
     position: relative;
     overflow: hidden;
-    /* Stable hit area: transform happens to children or box-shadow instead of shifting the whole box */
 }
 
-/* Internal Glow */
+.glass-card:hover {
+    border-color: rgba(174, 151, 117, 0.4);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(174, 151, 117, 0.03) 100%);
+    box-shadow:
+        0 30px 60px -12px rgba(0, 0, 0, 0.8),
+        0 0 40px rgba(174, 151, 117, 0.1);
+    transform: translateY(-5px) scale(1.01);
+}
+
 .glass-card::before {
     content: '';
     position: absolute;
     top: var(--y, 50%);
     left: var(--x, 50%);
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(212, 198, 179, 0.1) 0%, transparent 70%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(174, 151, 117, 0.12) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
     pointer-events: none;
     z-index: 0;
-}
-
-.glass-card:hover {
-    border-color: rgba(212, 198, 179, 0.3);
-    box-shadow:
-        0 25px 50px -12px rgba(0, 0, 0, 0.8),
-        0 0 30px rgba(174, 151, 117, 0.15),
-        inset 0 0 1px 1px rgba(255, 255, 255, 0.05);
-    /* Instead of translateY, we use a subtle scale or just shadow to avoid hit-area loop */
-    transform: scale(1.02);
-}
-
-.glass-card:hover::before {
-    opacity: 1;
 }
 
 /* Flip Cards - Click Based */

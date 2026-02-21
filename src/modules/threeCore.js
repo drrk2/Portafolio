@@ -18,20 +18,21 @@ export function initThreeCore(canvasSelector, containerSelector) {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const pointLight = new THREE.PointLight(0xAE9775, 2);
+    const pointLight = new THREE.PointLight(0xAE9775, 4);
     pointLight.position.set(5, 5, 5);
     scene.add(pointLight);
 
     // Obsidian Entity (Torus Knot)
-    const geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
+    const geometry = new THREE.TorusKnotGeometry(1.2, 0.35, 128, 32);
     const material = new THREE.MeshPhysicalMaterial({
-        color: 0x09090B,
-        metalness: 0.9,
-        roughness: 0.1,
+        color: 0x050507,
+        metalness: 1.0,
+        roughness: 0.05,
         clearcoat: 1.0,
         clearcoatRoughness: 0.1,
         emissive: 0xAE9775,
-        emissiveIntensity: 0.05
+        emissiveIntensity: 0.1,
+        reflectivity: 1.0
     });
     const entity = new THREE.Mesh(geometry, material);
     scene.add(entity);

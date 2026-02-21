@@ -45,7 +45,7 @@ function initCinematicAnimations() {
 
 function initBaseInteractions() {
     // Magnetic Mouse for Buttons & Cards
-    document.querySelectorAll('.glass-card, .service-card-flip, .btn').forEach(el => {
+    document.querySelectorAll('.glass-card, .service-card-flip, .btn, .hero-title').forEach(el => {
         el.addEventListener('mousemove', e => {
             const rect = el.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -53,18 +53,18 @@ function initBaseInteractions() {
             el.style.setProperty('--x', `${x}px`);
             el.style.setProperty('--y', `${y}px`);
 
-            if (el.classList.contains('btn')) {
+            if (el.classList.contains('btn') || el.classList.contains('hero-title')) {
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const deltaX = (x - centerX) * 0.3;
-                const deltaY = (y - centerY) * 0.3;
-                gsap.to(el, { x: deltaX, y: deltaY, duration: 0.3, ease: "power2.out" });
+                const deltaX = (x - centerX) * 0.15;
+                const deltaY = (y - centerY) * 0.15;
+                gsap.to(el, { x: deltaX, y: deltaY, duration: 0.4, ease: "power2.out" });
             }
         });
 
         el.addEventListener('mouseleave', () => {
-            if (el.classList.contains('btn')) {
-                gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+            if (el.classList.contains('btn') || el.classList.contains('hero-title')) {
+                gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" });
             }
         });
 
